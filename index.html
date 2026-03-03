@@ -2,195 +2,706 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Visibilité Instagram & TikTok 2026</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Visibilité Instagram & TikTok 2026 — Brille & Vibre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     :root {
-      --primary: #b38b59; /* doré/nude premium */
-      --secondary: #6b4e2e; /* brun */
-      --light-bg: #fafafa;
-      --accent-bg: #fff3e0;
+      --gold:       #C9A84C;
+      --gold-light: #E8CC80;
+      --gold-pale:  #F5EDD4;
+      --cream:      #FAF6EF;
+      --text:       #3A2E24;
+      --text-light: #8C7560;
+      --shadow:     rgba(90,60,30,0.13);
     }
 
     body {
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--light-bg);
-      color: #333;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: min(700px, 130vw);
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.18) 0%, transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: clamp(28px,6vw,52px) clamp(20px,5vw,36px) 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Back button ── */
+    .back-btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-decoration: none;
+      margin-bottom: clamp(20px,5vw,32px);
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(245,237,212,0.5);
+      transition: all 0.2s ease;
+      opacity: 0;
+      animation: riseIn 0.5s ease 0.05s forwards;
+    }
+    .back-btn:hover { background: var(--gold-pale); border-color: var(--gold); color: var(--text); transform: translateX(-2px); }
+    .back-btn svg { width: 14px; height: 14px; stroke: currentColor; flex-shrink: 0; }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: clamp(28px,6vw,44px);
+      opacity: 0;
+      animation: riseIn 0.8s cubic-bezier(.22,.68,0,1.2) 0.15s forwards;
+    }
+
+    .logo-ring {
+      position: relative;
+      width: clamp(72px,18vw,96px);
+      height: clamp(72px,18vw,96px);
+      margin-bottom: 18px;
+    }
+    .logo-ring::before {
+      content: '';
+      position: absolute; inset: -5px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold), var(--gold-light), var(--gold-pale), var(--gold), var(--gold-light), var(--gold));
+      animation: spin 8s linear infinite;
+    }
+    .logo-ring::after {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: var(--cream);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .logo-img {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover; object-position: top;
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(12px,3vw,14px);
+      font-style: italic;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px,6.5vw,36px);
+      font-weight: 900;
+      line-height: 1.15;
+      text-align: center;
+    }
+    .page-title em { font-style: italic; color: var(--gold); }
+
+    .subtitle {
+      margin-top: 9px;
+      font-size: clamp(13px,3.2vw,15px);
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.55;
+      max-width: 360px;
+    }
+
+    .divider {
+      width: 44px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin: 13px auto 0;
+    }
+
+    /* ── Sections ── */
+    .sections {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px,3.5vw,20px);
+    }
+
+    .section-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: clamp(18px,5vw,28px) clamp(16px,4.5vw,24px);
+      border: 1px solid rgba(201,168,76,0.15);
+      box-shadow: 0 2px 8px var(--shadow), 0 8px 24px rgba(90,60,30,0.06);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    /* Gold accent line left */
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light));
+      border-radius: 20px 0 0 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .section-card:hover::before { opacity: 1; }
+
+    /* Gold corner */
+    .section-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 70px; height: 70px;
+      background: conic-gradient(from 135deg, var(--gold-pale), transparent 60%);
+      border-radius: 0 20px 0 0;
+      opacity: 0.5;
+    }
+
+    .section-card:nth-child(1)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.3s  forwards; }
+    .section-card:nth-child(2)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.4s  forwards; }
+    .section-card:nth-child(3)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.5s  forwards; }
+    .section-card:nth-child(4)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.6s  forwards; }
+    .section-card:nth-child(5)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.7s  forwards; }
+    .section-card:nth-child(6)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.78s forwards; }
+    .section-card:nth-child(7)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.86s forwards; }
+    .section-card:nth-child(8)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 0.94s forwards; }
+    .section-card:nth-child(9)  { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 1.02s forwards; }
+    .section-card:nth-child(10) { animation: riseIn 0.6s cubic-bezier(.22,.68,0,1.2) 1.10s forwards; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+
+    .section-icon {
+      width: clamp(36px,9vw,44px);
+      height: clamp(36px,9vw,44px);
+      background: var(--gold-pale);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .section-card:hover .section-icon { background: linear-gradient(135deg, var(--gold), var(--gold-light)); transform: scale(1.08) rotate(-3deg); }
+    .section-icon svg { width: clamp(16px,4vw,20px); height: clamp(16px,4vw,20px); stroke: var(--gold); transition: stroke 0.3s; }
+    .section-card:hover .section-icon svg { stroke: #fff; }
+
+    .section-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-pale);
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(15px,4vw,18px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+      position: relative; z-index: 1;
+    }
+
+    .section-body {
+      position: relative; z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .section-body p {
+      font-size: clamp(13px,3.2vw,15px);
+      color: var(--text-light);
       line-height: 1.6;
     }
 
-    header {
-      background: var(--primary);
-      color: white;
-      padding: 1.5rem;
+    .section-body p strong { color: var(--text); font-weight: 600; }
+
+    /* List items */
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .item-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: clamp(13px,3.2vw,15px);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .item-list li .dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    /* Ranked list */
+    .ranked-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      list-style: none;
+    }
+    .ranked-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(13px,3.2vw,15px);
+      color: var(--text);
+    }
+    .rank-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      min-width: 22px;
+      height: 22px;
+      background: var(--gold-pale);
+      color: var(--gold);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ranked-list li:first-child .rank-badge { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #fff; }
+
+    /* Emotion tags */
+    .emotion-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .emotion-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(13px,3.2vw,14px);
+    }
+    .emotion-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.22rem 0.6rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tag-surprise  { background: #fef3c7; color: #92400e; }
+    .tag-id        { background: #dbeafe; color: #1e40af; }
+    .tag-reveal    { background: #d1fae5; color: #065f46; }
+    .tag-frustrate { background: #fee2e2; color: #991b1b; }
+    .tag-trust     { background: #ede9fe; color: #5b21b6; }
+    .emotion-arrow { color: var(--gold); font-weight: 600; font-size: 0.8rem; flex-shrink: 0; }
+    .emotion-desc  { color: var(--text-light); flex: 1; }
+
+    /* Checklist — special card */
+    .section-card.checklist-card {
+      background: linear-gradient(135deg, #2b1f12 0%, #3d2c18 60%, #2b1f12 100%);
+      border-color: rgba(201,168,76,0.35);
+      box-shadow: 0 8px 32px rgba(90,60,30,0.28);
+    }
+    .checklist-card .section-title { color: #fff; }
+    .checklist-card .section-icon { background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.3); }
+    .checklist-card .section-icon svg { stroke: var(--gold-light); }
+    .checklist-card:hover .section-icon { background: rgba(201,168,76,0.35); transform: scale(1.08); }
+    .checklist-card:hover .section-icon svg { stroke: var(--gold-light); }
+    .checklist-card::before { background: linear-gradient(180deg, var(--gold-light), var(--gold)); }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+    }
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: clamp(13px,3.2vw,15px);
+      color: rgba(248,239,227,0.9);
+      line-height: 1.5;
+    }
+    .check-box {
+      width: 20px; height: 20px;
+      border: 1.5px solid rgba(201,168,76,0.6);
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check-box svg { width: 11px; height: 11px; stroke: var(--gold-light); }
+
+    .checklist-note {
+      margin-top: 14px;
+      font-size: clamp(12px,3vw,13px);
+      color: rgba(232,204,128,0.85);
+      font-style: italic;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding-top: 12px;
+    }
+
+    /* Highlight quote */
+    .highlight-card {
+      background: var(--gold-pale);
+      border-color: rgba(201,168,76,0.4);
+    }
+    .highlight-card .section-body p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(15px,4vw,18px);
+      font-weight: 700;
+      color: var(--text);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: clamp(28px,6vw,40px);
+      font-size: clamp(11px,2.6vw,12px);
+      color: var(--text-light);
+      font-style: italic;
+      opacity: 0;
+      animation: riseIn 0.6s ease 1.3s forwards;
       text-align: center;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 1.5rem;
-    }
-
-    section {
-      background: white;
-      margin-bottom: 1.5rem;
-      padding: 1.2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    section h2 {
-      color: var(--primary);
-      margin-top: 0;
-      font-size: 1.4rem;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-    }
-
-    .checklist {
-      background: var(--accent-bg);
-      border: 1px solid var(--primary);
-      padding: 1rem;
-      border-radius: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.4rem;
-      }
-      section h2 {
-        font-size: 1.2rem;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .section-card, .header, .footer, .back-btn { opacity: 1; }
     }
   </style>
 </head>
 <body>
+<div class="wrapper">
 
-  <header>
-    <h1>VISIBILITÉ SUR INSTAGRAM & TIKTOK EN 2026</h1>
-    <p><em>Ce qui fait réellement des vues</em></p>
-  </header>
+  <!-- Back -->
+  <a href="https://kcoaching02.github.io/BAP_SOUS-MENU-LES-BASES/" class="back-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour aux Bases
+  </a>
 
-  <main>
-    <section>
-      <h2>1. UNE VIDÉO FAIT DES VUES QUAND ELLE DÉCLENCHE DES RÉACTIONS FORTES</h2>
-      <p>Du plus fort au plus faible :</p>
-      <ul>
-        <li> Partages</li>
-        <li> Enregistrements</li>
-        <li> Commentaires</li>
-        <li> Visionnage jusqu’au bout et replays</li>
-        <li> Visite du profil et visionnage d’autres vidéos</li>
-        <li> Abonnement</li>
-        <li> Likes (le plus faible de tous)</li>
-      </ul>
-    </section>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-ring">
+      <img src="menu.jpg" alt="Brille & Vibre" class="logo-img">
+    </div>
+    <p class="brand">Brille &amp; Vibre</p>
+    <h1 class="page-title">Visibilité<br><em>Instagram & TikTok</em></h1>
+    <p class="subtitle">Ce qui fait réellement des vues en 2026.</p>
+    <div class="divider"></div>
+  </div>
 
-    <section>
-      <h2>2. CE QUI DÉCLENCHE CES RÉACTIONS — LES ÉMOTIONS</h2>
-      <p>Les gens réagissent quand le contenu provoque :</p>
-      <ul>
-        <li> La surprise → ils partagent</li>
-        <li> L’identification (“c’est trop moi ça”) → ils partagent</li>
-        <li> La révélation (“je savais pas ça !”) → ils enregistrent</li>
-        <li> La frustration ou la polarisation → ils commentent</li>
-        <li> La confiance → ils passent à l'action, ils s'abonnent</li>
-      </ul>
-      <p>Un contenu sans émotion est peu partagé, même s’il est bon.</p>
-    </section>
+  <!-- Sections -->
+  <div class="sections">
 
-    <section>
-      <h2>3. L’ACCROCHE — LES 3 PREMIÈRES SECONDES</h2>
-      <p>Elle peut être visuelle, sonore ou textuelle. 
-Elle doit créer l’envie de rester et correspondre exactement à ce que la vidéo va livrer.</p>
-      <p>Pour retenir jusqu’au bout :</p>
-      <ul>
-        <li> Montre le résultat en premier, explique comment après</li>
-        <li> Pose une question au début, réponds à la fin</li>
-        <li> Annonce dès le départ “je te montre ça à la fin”</li>
-      </ul>
-    </section>
+    <!-- 1 Réactions -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+            <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">1 / 8</div>
+          <div class="section-title">Une vidéo fait des vues quand elle déclenche des réactions fortes</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Du signal le plus fort au plus faible :</p>
+        <ul class="ranked-list">
+          <li><span class="rank-badge">1</span> Partages</li>
+          <li><span class="rank-badge">2</span> Enregistrements</li>
+          <li><span class="rank-badge">3</span> Commentaires</li>
+          <li><span class="rank-badge">4</span> Visionnage complet & replays</li>
+          <li><span class="rank-badge">5</span> Visite du profil</li>
+          <li><span class="rank-badge">6</span> Abonnement</li>
+          <li><span class="rank-badge">7</span> Likes <em style="color:var(--text-light); font-size:0.85em">(le plus faible)</em></li>
+        </ul>
+      </div>
+    </div>
 
-    <section>
-      <h2>4. LA RÉTENTION — CE QUE L’ALGO MESURE VRAIMENT</h2>
-      <ul>
-        <li> Le pourcentage moyen regardé</li>
-        <li> Les replays — une vidéo courte vue 2 fois est plus puissante qu’une longue vue une seule fois</li>
-        <li> L’abandon dans les 3 premières secondes</li>
-        <li> À quel moment les gens décrochent</li>
-      </ul>
-      <p>Lis tes statistiques après chaque vidéo pour comprendre où les gens partent.</p>
-    </section>
+    <!-- 2 Émotions -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 13s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9"/>
+            <line x1="15" y1="9" x2="15.01" y2="9"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">2 / 8</div>
+          <div class="section-title">Ce qui déclenche les réactions — les émotions</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="emotion-grid">
+          <div class="emotion-row"><span class="emotion-tag tag-surprise">Surprise</span><span class="emotion-arrow">→</span><span class="emotion-desc">ils partagent</span></div>
+          <div class="emotion-row"><span class="emotion-tag tag-id">Identification</span><span class="emotion-arrow">→</span><span class="emotion-desc">"c'est trop moi ça" → ils partagent</span></div>
+          <div class="emotion-row"><span class="emotion-tag tag-reveal">Révélation</span><span class="emotion-arrow">→</span><span class="emotion-desc">"je savais pas ça !" → ils enregistrent</span></div>
+          <div class="emotion-row"><span class="emotion-tag tag-frustrate">Frustration</span><span class="emotion-arrow">→</span><span class="emotion-desc">polarisation → ils commentent</span></div>
+          <div class="emotion-row"><span class="emotion-tag tag-trust">Confiance</span><span class="emotion-arrow">→</span><span class="emotion-desc">ils s'abonnent, passent à l'action</span></div>
+        </div>
+        <p>Un contenu sans émotion est peu partagé, même s'il est bon.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>5. LA COHÉRENCE DU COMPTE</h2>
-      <p>L’algorithme montre ton contenu à des personnes similaires à ceux qui t’aiment déjà. Si ton compte est flou, il cible mal.</p>
-      <ul>
-        <li> Ta bio, tes contenus, tes hashtags pointent dans la même direction</li>
-        <li> Un compte qui parle de tout à tout le monde n’est poussé par personne</li>
-      </ul>
-    </section>
+    <!-- 3 Accroche -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">3 / 8</div>
+          <div class="section-title">L'accroche — les 3 premières secondes</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Visuelle, sonore ou textuelle — elle doit créer l'envie de rester et correspondre exactement à ce que la vidéo va livrer.</p>
+        <p><strong>Pour retenir jusqu'au bout :</strong></p>
+        <ul class="item-list">
+          <li><span class="dot"></span>Montre le résultat en premier, explique comment après</li>
+          <li><span class="dot"></span>Pose une question au début, réponds à la fin</li>
+          <li><span class="dot"></span>Annonce dès le départ "je te montre ça à la fin"</li>
+        </ul>
+      </div>
+    </div>
 
-    <section>
-      <h2>6. LA QUALITÉ MINIMALE</h2>
-      <ul>
-        <li> Lumière naturelle de face</li>
-        <li> Son propre — micro ou pièce calme</li>
-        <li> Musique adaptée au message</li>
-        <li> Image stable</li>
-      </ul>
-      <p>Une vidéo utile mais difficile à regarder ou à écouter perd en visibilité.</p>
-    </section>
+    <!-- 4 Rétention -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6"  y1="20" x2="6"  y2="14"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">4 / 8</div>
+          <div class="section-title">La rétention — ce que l'algo mesure vraiment</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="item-list">
+          <li><span class="dot"></span>Le pourcentage moyen regardé</li>
+          <li><span class="dot"></span>Les replays — une vidéo courte vue 2 fois est plus puissante qu'une longue vue une seule fois</li>
+          <li><span class="dot"></span>L'abandon dans les 3 premières secondes</li>
+          <li><span class="dot"></span>À quel moment les gens décrochent</li>
+        </ul>
+        <p>Lis tes statistiques après chaque vidéo pour comprendre où les gens partent.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>7. LA RÉGULARITÉ</h2>
-      <p>L’algorithme compare ta vidéo à tes vidéos précédentes. Si elle performe mieux, il la pousse plus. Mieux vaut 3 bons contenus par semaine que 10 médiocres.</p>
-      <p>Les premières réactions comptent double — réponds vite aux premiers commentaires.</p>
-    </section>
+    <!-- 5 Cohérence -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">5 / 8</div>
+          <div class="section-title">La cohérence du compte</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>L'algorithme montre ton contenu à des personnes similaires à ceux qui t'aiment déjà. Si ton compte est flou, il cible mal.</p>
+        <ul class="item-list">
+          <li><span class="dot"></span>Ta bio, tes contenus, tes hashtags pointent dans la même direction</li>
+          <li><span class="dot"></span>Un compte qui parle de tout à tout le monde n'est poussé par personne</li>
+        </ul>
+      </div>
+    </div>
 
-    <section>
-      <h2>8. VIRALITÉ ≠ VENTES</h2>
-      <p>Une vidéo peut faire des millions de vues et ne vendre rien. 500 vues devant ta cible valent mieux que 500 000 vues devant n’importe qui.</p>
-    </section>
+    <!-- 6 Qualité -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 7l-7 5 7 5V7z"/>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">6 / 8</div>
+          <div class="section-title">La qualité minimale</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="item-list">
+          <li><span class="dot"></span>Lumière naturelle de face</li>
+          <li><span class="dot"></span>Son propre — micro ou pièce calme</li>
+          <li><span class="dot"></span>Musique adaptée au message</li>
+          <li><span class="dot"></span>Image stable</li>
+        </ul>
+        <p>Une vidéo utile mais difficile à regarder ou à écouter perd en visibilité.</p>
+      </div>
+    </div>
 
-    <section class="checklist">
-      <h2>CHECKLIST AVANT DE PUBLIER</h2>
-      <ul>
-        <li> Mon accroche crée une tension ?</li>
-        <li> Il y a une émotion claire ?</li>
-        <li> La vidéo donne envie d’aller sur mon profil ?</li>
-        <li> Je demande une action précise à la fin ?</li>
-        <li> Ce contenu parle à UNE cible précise ?</li>
-      </ul>
-      <p>Moins de 4 oui → retravaille avant de publier.</p>
-    </section>
+    <!-- 7 Régularité -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8"  y1="2" x2="8"  y2="6"/>
+            <line x1="3"  y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">7 / 8</div>
+          <div class="section-title">La régularité</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>L'algorithme compare ta vidéo à tes vidéos précédentes. Si elle performe mieux, il la pousse plus.</p>
+        <ul class="item-list">
+          <li><span class="dot"></span>Mieux vaut 3 bons contenus par semaine que 10 médiocres</li>
+          <li><span class="dot"></span>Les premières réactions comptent double — réponds vite aux premiers commentaires</li>
+        </ul>
+      </div>
+    </div>
 
-    <section>
-      <p><strong>La visibilité attire. La stratégie convertit.</strong></p>
-    </section>
-  </main>
+    <!-- 8 Viralité ≠ Ventes -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num">8 / 8</div>
+          <div class="section-title">Viralité ≠ Ventes</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Une vidéo peut faire des millions de vues et ne vendre rien.</p>
+        <p><strong>500 vues devant ta cible valent mieux que 500 000 vues devant n'importe qui.</strong></p>
+      </div>
+    </div>
 
-  <footer>
-    &copy; 2026 - Stratégie & Visibilité
-  </footer>
+    <!-- Checklist -->
+    <div class="section-card checklist-card">
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-num" style="background:rgba(201,168,76,0.2); color:var(--gold-light)">Checklist</div>
+          <div class="section-title">Avant de publier</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="check-list">
+          <li>
+            <div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Mon accroche crée une tension ?
+          </li>
+          <li>
+            <div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Il y a une émotion claire ?
+          </li>
+          <li>
+            <div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            La vidéo donne envie d'aller sur mon profil ?
+          </li>
+          <li>
+            <div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Je demande une action précise à la fin ?
+          </li>
+          <li>
+            <div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Ce contenu parle à UNE cible précise ?
+          </li>
+        </ul>
+        <p class="checklist-note">Moins de 4 oui → retravaille avant de publier.</p>
+      </div>
+    </div>
 
+    <!-- Quote finale -->
+    <div class="section-card highlight-card">
+      <div class="section-body">
+        <p>La visibilité attire.<br>La stratégie convertit.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer">brillevibre.com &nbsp;·&nbsp; © 2025</p>
+
+</div>
 </body>
 </html>
